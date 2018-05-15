@@ -63,18 +63,18 @@ public class GestureDetectGridView extends GridView {
                         return false;
                     }
                     if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.up, position);
+                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.UP, position);
                     } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.down, position);
+                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.DOWN, position);
                     }
                 } else {
                     if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
                         return false;
-                    
+                    }
                     if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.left, position);
+                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.LEFT, position);
                     } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.right, position);
+                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.RIGHT, position);
                     }
                 }
 

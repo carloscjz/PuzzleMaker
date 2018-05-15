@@ -15,8 +15,8 @@ public class MainActivity extends Activity {
     private static final int PICK_FOTO = 1;
 
     private Button fotoButton, borrarButton, jugarButton;
-    Uri imageUri;
-    ImageView fotoImageView;
+    private Uri imageUri;
+    private ImageView fotoImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
