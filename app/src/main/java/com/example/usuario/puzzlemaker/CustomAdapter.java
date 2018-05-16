@@ -16,7 +16,7 @@ public class CustomAdapter extends BaseAdapter {
     private int mColumnWidth, mColumnHeight;
 
     public CustomAdapter(ArrayList<Button> mButtons, int columnWidth, int columnHeight) {
-        mButtons = mButtons;
+        this.mButtons = mButtons;
         mColumnWidth = columnWidth;
         mColumnHeight = columnHeight;
     }

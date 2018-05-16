@@ -26,6 +26,7 @@ public class JuegoPuzleActivity extends Activity {
     private static final int COLUMNS = 3;
     private static final int DIMENSIONS = COLUMNS * COLUMNS;
 
+    private static String[] winningOrder;
     private static String[] tileList;
     private static Bitmap[] piezas;
     private static GestureDetectGridView mGridView;
@@ -152,8 +153,7 @@ public class JuegoPuzleActivity extends Activity {
         for (int i=0; i<tileList.length; i++) {
             button = new Button(context);
 
-            Log.d("Prueba", tileList[i]);
-            button.setBackground(new BitmapDrawable(context.getResources(), piezas[Integer.getInteger(tileList[i])]));
+            button.setBackground(new BitmapDrawable(context.getResources(), piezas[Integer.parseInt(tileList[i])]));
 
             buttons.add(button);
         }
@@ -185,8 +185,10 @@ public class JuegoPuzleActivity extends Activity {
         mGridView.setNumColumns(COLUMNS);
 
         tileList = new String[DIMENSIONS];
+        winningOrder = new String[DIMENSIONS];
         for (int i=0; i<DIMENSIONS; i++) {
             tileList[i] = String.valueOf(i);
+            winningOrder[i] = String.valueOf(i);
         }
     }
 
@@ -226,7 +228,7 @@ public class JuegoPuzleActivity extends Activity {
             else Toast.makeText(context, "Invalid move", Toast.LENGTH_SHORT).show();
 
             //Piezas centrales derecha
-        }else if (position>COLUMNS-1 && position<DIMENSIONS && position%COLUMNS-1==0) {
+        }else if (position>COLUMNS-1 && position<DIMENSIONS-COLUMNS && (position-(COLUMNS-1))%COLUMNS==0) {
             if (direction.equals("up")) swap(context, position, -COLUMNS);
             else if (direction.equals("left")) swap(context, position, -1);
             else if (direction.equals("down")) swap(context, position, COLUMNS);
@@ -258,6 +260,24 @@ public class JuegoPuzleActivity extends Activity {
             else if (direction.equals("right")) swap(context, position, 1);
             else swap(context, position, -COLUMNS);
         }
+
+        checkPuzzle(context);
+    }
+
+    /**
+     * Comprueba si se ha ganado la partida
+     */
+    private static void checkPuzzle(Context context){
+        boolean win = true;
+
+        for (int i=0; i<tileList.length; i++){
+            if (!tileList[i].equals(winningOrder[i])){
+                win = false;
+                break;
+            }
+        }
+
+        if (win) Toast.makeText(context, "Puzzle completed", Toast.LENGTH_SHORT).show();
     }
 
 
