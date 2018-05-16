@@ -1,0 +1,15 @@
+Index: app/src/main/java/com/example/usuario/puzzlemaker/JuegoPuzleActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/usuario/puzzlemaker/JuegoPuzleActivity.java	(date 1526411782000)
++++ app/src/main/java/com/example/usuario/puzzlemaker/JuegoPuzleActivity.java	(revision )
+@@ -156,6 +156,7 @@
+             button.setBackground(new BitmapDrawable(context.getResources(), piezas[Integer.getInteger(tileList[i])]));
+ 
+             buttons.add(button);
++            //eee
+         }
+ 
+         mGridView.setAdapter(new CustomAdapter(buttons, mColumnWidth, mColumnHeight));
