@@ -29,7 +29,6 @@
         android:backgroundTint="@android:color/holo_blue_light"
         android:text="@string/foto_button"
         app:layout_constraintBottom_toTopOf="@+id/borrarButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fotoImageView" />
