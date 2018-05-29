@@ -53,9 +53,6 @@ public class JuegoPuzleActivity extends Activity {
             //Obtenemos el mapa de bits correspondiente al Uri
             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
-            //Redimensionamos la imagen para adaptarla a la pantalla
-            imageBitmap = resizeBitmap(imageBitmap);
-
             //Particion de la imagen
             piezas = creaPiezas(imageBitmap);
 
@@ -102,31 +99,6 @@ public class JuegoPuzleActivity extends Activity {
     }
 
     /**
-     * Cambia las dimensiones de un bitmap adaptandolo a la pantalla
-     * @param imageBitmap
-     * @return
-     */
-    private Bitmap resizeBitmap (Bitmap imageBitmap) {
-        //Obtencion dimensiones pantalla
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int sWidth = metrics.widthPixels; // ancho absoluto en pixels
-        int sHeight = metrics.heightPixels; // alto absoluto en pixels
-
-        //Redimensionamiento de la imagen
-        int iWidth = imageBitmap.getWidth();
-        int iHeight = imageBitmap.getHeight();
-
-        if (iWidth>=iHeight){//Para evitar deformamiento de la imagen
-            imageBitmap = Bitmap.createScaledBitmap(imageBitmap, sWidth, iHeight*(sWidth/iWidth), false);
-        }else{
-            imageBitmap = Bitmap.createScaledBitmap(imageBitmap, iWidth*(sHeight/iHeight), sHeight, false);
-        }
-
-        return imageBitmap;
-    }
-
-    /**
      * Crea las piezas a partir de una imagen
      * @param imageBitmap
      * @return
@@ -159,6 +131,8 @@ public class JuegoPuzleActivity extends Activity {
         }
 
         mGridView.setAdapter(new CustomAdapter(buttons, mColumnWidth, mColumnHeight));
+
+        checkPuzzle(context);
     }
 
     /**
@@ -261,7 +235,7 @@ public class JuegoPuzleActivity extends Activity {
             else swap(context, position, -COLUMNS);
         }
 
-        checkPuzzle(context);
+
     }
 
     /**

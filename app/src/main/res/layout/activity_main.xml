@@ -47,8 +47,8 @@
 
     <ImageView
         android:id="@+id/fotoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="8dp"
         android:background="@android:drawable/ic_menu_gallery"
         android:src="@android:color/transparent"
