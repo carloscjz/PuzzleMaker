@@ -23,6 +23,8 @@ import java.util.Random;
 
 public class JuegoPuzleActivity extends Activity {
 
+    private static boolean isWon = false;
+
     private static final int COLUMNS = 3;
     private static final int DIMENSIONS = COLUMNS * COLUMNS;
 
@@ -111,8 +113,9 @@ public class JuegoPuzleActivity extends Activity {
 
         for (int i=0; i<COLUMNS; i++){
             for (int j=0; j<COLUMNS; j++) {
-                piezas[contador++] = Bitmap.createBitmap(imageBitmap, anchoPieza* i,
-                        altoPieza* j, anchoPieza-1, altoPieza-1);
+                piezas[contador] = Bitmap.createBitmap(imageBitmap, anchoPieza* j,
+                        altoPieza*i, anchoPieza-1, altoPieza-1);
+                contador++;
             }
         }
         return piezas;
@@ -121,6 +124,8 @@ public class JuegoPuzleActivity extends Activity {
     private static void display(Context context) {
         ArrayList<Button> buttons = new ArrayList<>();
         Button button;
+
+        isWon = checkPuzzle(context);
 
         for (int i=0; i<tileList.length; i++) {
             button = new Button(context);
@@ -132,7 +137,11 @@ public class JuegoPuzleActivity extends Activity {
 
         mGridView.setAdapter(new CustomAdapter(buttons, mColumnWidth, mColumnHeight));
 
-        checkPuzzle(context);
+        if(isWon) Toast.makeText(context, "Puzzle completed", Toast.LENGTH_SHORT).show();
+    }
+
+    public static boolean isCompleted(){
+        return isWon;
     }
 
     /**
@@ -241,7 +250,7 @@ public class JuegoPuzleActivity extends Activity {
     /**
      * Comprueba si se ha ganado la partida
      */
-    private static void checkPuzzle(Context context){
+    private static boolean checkPuzzle(Context context){
         boolean win = true;
 
         for (int i=0; i<tileList.length; i++){
@@ -251,7 +260,7 @@ public class JuegoPuzleActivity extends Activity {
             }
         }
 
-        if (win) Toast.makeText(context, "Puzzle completed", Toast.LENGTH_SHORT).show();
+        return win;
     }
 
 

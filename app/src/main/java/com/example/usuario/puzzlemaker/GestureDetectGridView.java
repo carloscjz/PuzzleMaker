@@ -54,30 +54,31 @@ public class GestureDetectGridView extends GridView {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                    float velocityY) {
-                final int position = GestureDetectGridView.this.pointToPosition
-                        (Math.round(e1.getX()), Math.round(e1.getY()));
+                if(!JuegoPuzleActivity.isCompleted()) {
+                    final int position = GestureDetectGridView.this.pointToPosition
+                            (Math.round(e1.getX()), Math.round(e1.getY()));
 
-                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
-                    if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH
-                            || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY) {
-                        return false;
-                    }
-                    if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.UP, position);
-                    } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.DOWN, position);
-                    }
-                } else {
-                    if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
-                        return false;
-                    }
-                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.LEFT, position);
-                    } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
-                        JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.RIGHT, position);
+                    if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+                        if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH
+                                || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY) {
+                            return false;
+                        }
+                        if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
+                            JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.UP, position);
+                        } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
+                            JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.DOWN, position);
+                        }
+                    } else {
+                        if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
+                            return false;
+                        }
+                        if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
+                            JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.LEFT, position);
+                        } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
+                            JuegoPuzleActivity.moveTiles(context, JuegoPuzleActivity.RIGHT, position);
+                        }
                     }
                 }
-
                 return super.onFling(e1, e2, velocityX, velocityY);
             }
         });
